@@ -12,7 +12,7 @@ const config = merge({
     externals: [nodeExternals()],
     output: {
         path: __dirname + '/server/',
-        filename: "[name].bundle.js",
+        filename: "bundle.js",
         libraryTarget: 'commonjs2',
     },
     plugins: [

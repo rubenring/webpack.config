@@ -10,7 +10,8 @@ const prodConfig = merge({
         new webpack.DefinePlugin({
             "process.env": {
                 "NODE_ENV": JSON.stringify("production")
-            }
+            },
+            VERSION: JSON.stringify("5fa3b9"),
         })
     ]
 });
