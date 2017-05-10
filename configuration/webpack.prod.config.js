@@ -1,5 +1,5 @@
-const merge = require('webpack-merge');
-const webpack = require('webpack');
+import merge from'webpack-merge';
+import webpack from'webpack';
 
 const prodConfig = merge({
     plugins: [
