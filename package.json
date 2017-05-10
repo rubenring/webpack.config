@@ -7,9 +7,9 @@
     "start": "SET NODE_ENV=production & npm run build:prod",
     "clean": "rimraf server/",
     "dev": "SET NODE_ENV=development & npm run build & npm run watch",
-    "watch": "nodemon server/main.bundle.js --watch server/",
+    "watch": "nodemon server/bundle.js --watch server/",
     "build": "npm run clean && webpack --watch --progress",
-    "build:prod": "webpack -p && node server/main.bundle.js",
+    "build:prod": "webpack -p && node server/bundle.js",
     "deploy-dev": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
