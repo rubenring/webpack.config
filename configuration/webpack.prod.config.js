@@ -1,7 +1,13 @@
-import merge from'webpack-merge';
-import webpack from'webpack';
+import merge from 'webpack-merge';
+import webpack from 'webpack';
+import path from 'path';
 
 const prodConfig = merge({
+    output: {
+        path: path.join(__dirname, '/dist/'),
+        filename: '[name]-[hash].min.js',
+        publicPath: '/'
+    },
     plugins: [
         new webpack.LoaderOptionsPlugin({
             minimize: true,
@@ -11,7 +17,6 @@ const prodConfig = merge({
             "process.env": {
                 "NODE_ENV": JSON.stringify("production")
             },
-            VERSION: JSON.stringify("5fa3b9"),
         })
     ]
 });

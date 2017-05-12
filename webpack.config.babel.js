@@ -3,40 +3,37 @@ import merge from 'webpack-merge';
 import prodConfig from './configuration/webpack.prod.config';
 import devConfig from './configuration/webpack.dev.config';
 import nodeExternals from 'webpack-node-externals';
+import path from 'path';
+import htmlWebpackPlugin from 'html-webpack-plugin';
 
 const config = merge({
+    devtool: 'inline-source-map',
     entry: [
-        __dirname + '/server.js'
+        './src/client/index.js',
     ],
-    target: 'node',
-    externals: [nodeExternals()],
+    //target: 'node',
+    target: 'web',
+   // externals: [nodeExternals()],
     output: {
-        path: __dirname + '/server/',
+        path: path.join(__dirname, 'dist'),
         filename: "bundle.js",
-        libraryTarget: 'commonjs2',
     },
-    plugins: [
-        new webpack.EnvironmentPlugin({
-            NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
-            DEBUG: false
-        })
-    ],
     module: {
-        rules: [{
+        loaders: [
+        {
             test: /\.js$/,
-            exclude: [/node_modules/],
-            use: [{
-                loader: 'babel-loader',
-                options: {
-                    babelrc: false,
-                    presets: ['es2015']
-                },
-            }],
-        }, ]
+            loader: 'babel-loader',
+            exclude: /node_modules/,
+            include: path.join(__dirname, 'src'),
+            query: {
+                presets: [ 'react-hmre', 'es2015', 'react' ]
+            }
+        }
+        ]
     },
 })
 
-if (process.env.NODE_ENV == "production") {
+if (process.env.NODE_ENV === "production") {
     module.exports = merge(config, prodConfig);
 } else {
     module.exports = merge(config, devConfig);
