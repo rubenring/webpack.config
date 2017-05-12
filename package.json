@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "SET NODE_ENV=production & npm run build:prod",
-    "dev": "SET NODE_ENV=development && node src/server/index.js ",
+    "dev": "SET NODE_ENV=development && nodemon src/server/index.js --ignore src/common/",
     "clean": "rimraf dist/",
     "build:prod": "npm run clean && webpack -p"
   },

@@ -3,9 +3,6 @@ import path from 'path';
 import http from 'http';
 import SocketIO from 'socket.io';
 import webpack from 'webpack';
-import React from 'react'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
 
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
@@ -21,7 +18,6 @@ const io = new SocketIO(server);
 const PORT = process.env.PORT || 3000;
 
 if (process.env.NODE_ENV !== "production") {
-console.log(process.env.NODE_ENV)
   const compiler = webpack(config);
   console.log(config.output.publicPath)
   app.use(webpackMiddleware(compiler, {
@@ -30,7 +26,6 @@ console.log(process.env.NODE_ENV)
   }));
 
   app.use(webpackHotMiddleware(compiler));
-
 
 } else {
   app.use('/static', express.static(path.join(__dirname, "static")));

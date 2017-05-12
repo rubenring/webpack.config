@@ -3,7 +3,11 @@ export default (html, preloadedState) => {
         <!doctype html>
         <html>
         <head>
-            <title>Redux Universal Example</title>
+            <title>Socket IO - React SSR</title>
+            <script src="/socket.io/socket.io.js"></script>
+            <script>
+                var socket = io();
+            </script>
         </head>
         <body>
             <div id="root">${html}</div>

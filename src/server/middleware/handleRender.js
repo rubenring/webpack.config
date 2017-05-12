@@ -4,20 +4,21 @@ import renderFullPage from './renderFullPage';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import configureStore from '../../common/store/configureStore'
-import App from '../../common/containers/App'
+import App from '../../common/components/App'
 import reducer from '../../common/reducers';
 import { fetchCounter } from '../../common/api/counter'
 import qs from 'qs';
+import TicTacState from '../../constants/tictacstate';
 
 export default (req, res) => {
-  // Query our mock API asynchronously
-  fetchCounter(apiResult => {
+
     // Read the counter from the request, if provided
     const params = qs.parse(req.query)
-    const counter = parseInt(params.counter, 10) || apiResult || 0
 
+    const counter = parseInt(params.counter) ? Number(params.counter) :  0;
+    const tictacto = TicTacState;
     // Compile an initial state
-    const preloadedState = { counter }
+    const preloadedState = { counter, tictacto  }
 
     // Create a new Redux store instance
     const store = configureStore(preloadedState)
@@ -34,5 +35,4 @@ export default (req, res) => {
 
     // Send the rendered page back to the client
     res.send(renderFullPage(html, finalState))
-  })
 }
