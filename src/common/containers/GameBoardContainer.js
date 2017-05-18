@@ -1,14 +1,14 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import TicTac from '../components/Tictac'
+import GameBoard from '../components/GameBoard'
 import * as tictacActions from '../actions/tictacActions'
 
 const mapStateToProps = (state) => ({
-  moves: state.tictacto.moves
+  board: state.tictacto.board,
 })
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(tictacActions, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TicTac);
+export default connect(mapStateToProps, mapDispatchToProps)(GameBoard);

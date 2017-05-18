@@ -1,6 +1,7 @@
-import {DO_MOVE, CLEAR_BOARD, BACK, FORWARD} from '../actions/tictacActions';
+import {DO_MOVE, CLEAR_BOARD, BACK} from '../actions/tictacActions';
 import TicTacState from '../../constants/tictacstate';
 const initalState = TicTacState;
+const stateList = [];
 
 const setMoves = (state) => {
     return Object.assign({}, state, {
@@ -27,23 +28,27 @@ const doMove = (state, payload)=> {
 const clearBoard = () => {
     return initalState;
 }
-const goBack = ()  => {
-    return state;    
+const goBack = (state)  => {
+    if(stateList.length >= 1){
+        const prewState = stateList.pop();
+        return prewState; 
+    }else{
+        return state;
+    }
+   
 }
-const goForward = () => {
-    return state;
-}
+
 
 const tictacto = (state = initalState, action) => {
     switch(action.type){
         case DO_MOVE:
+            stateList.push(state);
             return doMove(state, action.payload)
         case CLEAR_BOARD:
+            stateList.push(state);
             return clearBoard(state)
         case BACK:
             return goBack(state)
-        case FORWARD:
-            return goForward(state)
         default:
             return state
     }

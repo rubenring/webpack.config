@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const style = {
-    height: "200px",
-    width: "200px",
+    height: "150px",
+    width: "150px",
     margin: "0.3em",
     border: "1px solid black",
     display: "flex",
@@ -24,4 +25,9 @@ const square = ({id, symbol, onClick}) => (
         <span style={symbolStyle}>{symbol}</span>
     </div>
 );
+square.PropTypes = {
+    id: PropTypes.number.isRequired,
+    symbol: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired
+}
 export default square;

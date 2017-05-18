@@ -1,6 +1,12 @@
 import React from 'react';
-import Counter from '../containers/CounterContainer';
 import Tictac from '../containers/TicTacContainer';
+import Chat from './Chat';
+
+const appStyles = {
+  display: "flex",
+  justifyContent: "space-around",
+  alignItems: "flex-start"
+}
 
 class App extends React.Component {
   constructor(props) {
@@ -8,7 +14,8 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div style={appStyles}>
+        <Chat />
         <Tictac />
       </div>
     );
