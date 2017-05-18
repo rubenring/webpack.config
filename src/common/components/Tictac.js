@@ -10,7 +10,7 @@ const Tictac = ({moves, clearBoard, goBack}) => (
         <Header />
         <GameBoardContainer />
         <div>
-            <p><span>You are on move: </span><span>{moves}</span></p>
+            <p><span>Du er på trekk: </span><span>{moves}</span></p>
         </div>     
         <div className="buttons">
             <button onClick={() => goBack()} className="btn-back">Tilbake</button>    

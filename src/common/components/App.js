@@ -1,6 +1,8 @@
 import React from 'react';
 import Tictac from '../containers/TicTacContainer';
 import Chat from './Chat';
+import Username from './UserName';
+import { connect } from 'react-redux';
 
 const appStyles = {
   display: "flex",
@@ -15,11 +17,11 @@ class App extends React.Component {
   render() {
     return (
       <div style={appStyles}>
-        <Chat />
+        { this.props.username ? <Chat /> : <Username /> }        
         <Tictac />
       </div>
     );
   }
 }
 
-export default App;
+export default connect(state => ({username: state.chat.username}))(App);

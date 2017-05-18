@@ -1,9 +1,8 @@
 import { combineReducers } from 'redux';
-import counter from './counter';
 import tictacto from './tictactoe';
-
+import chat from './chat'
 const rootReducer = combineReducers({
-  counter,
+  chat,
   tictacto
 })
 

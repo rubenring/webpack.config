@@ -9,6 +9,7 @@ import reducer from '../../common/reducers';
 import { fetchCounter } from '../../common/api/counter'
 import qs from 'qs';
 import TicTacState from '../../constants/tictacstate';
+import Chat from '../../constants/Chat'
 
 export default (req, res) => {
 
@@ -17,8 +18,9 @@ export default (req, res) => {
 
     const counter = parseInt(params.counter) ? Number(params.counter) :  0;
     const tictacto = TicTacState;
+    const chat = Chat;
     // Compile an initial state
-    const preloadedState = { counter, tictacto  }
+    const preloadedState = { tictacto, chat  }
 
     // Create a new Redux store instance
     const store = configureStore(preloadedState)
