@@ -1,0 +1,52 @@
+    <article class="col-xs-12">
+      <div class="access-dropdowns">
+        <div class="row">
+          <div class="col-xs-12 col-sm-3">
+            <div class="btn-group" uib-dropdown keyboard-nav>
+              <button id="btn-ddl-employmentType" type="button" class="btn btn-default" uib-dropdown-toggle>
+                {{c.newEntryModel.type ? c.newEntryModel.type : "Privilegie"}} 
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-ddl-privilage">
+                <li ng-repeat="type in c.typeList" role="menuitem">
+                  <a href="#" ng-bind="type" ng-click="c.addToEntry('type', type)"></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-3">
+            <div class="btn-group" uib-dropdown keyboard-nav>
+              <button id="btn-ddl-region" type="button" class="btn btn-default" uib-dropdown-toggle>
+                {{c.newEntryModel.region ? c.newEntryModel.region : "Region"}} 
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-ddl-privilage">
+                <li ng-repeat="region in c.regionList" role="menuitem">
+                  <a href="#" ng-bind="region" ng-click="c.addToEntry('region', region)"></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-3">
+            <div class="btn-group" uib-dropdown keyboard-nav>
+              <button id="btn-ddl-place" type="button" class="btn btn-default" uib-dropdown-toggle>
+                {{c.newEntryModel.place ? c.newEntryModel.place : "Sted"}} 
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-ddl-privilage">
+                <li ng-click="c.dontClick($event)">
+                  <input class="form-control" ng-model="search.name"/>
+                </li>
+                <li ng-repeat="place in c.placeList | filter:search | limitTo : 5" role="menuitem">
+                  <a href="#" ng-bind="place.name" ng-click="c.addToEntry('place', place.name)"></a>
+                </li>
+              </ul>
+            </div>
+          <div>
+          <div class="col-xs-12 col-sm-3">                                                                                 
+            <div class="btn-group">
+              <button class="btn btn-success" ng-click="c.addToList()" ng-disabled="!c.newEntryModel.type || !c.newEntryModel.region || !c.newEntryModel.place">+</button>
+            </div>
+      	</div>
+      </div>
+    </article>
