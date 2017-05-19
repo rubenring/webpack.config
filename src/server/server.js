@@ -40,6 +40,20 @@ io.on('connection', function (socket) {
     });
     console.log('user connected');
     //socket.use(dogeError);
+    socket.on('chat', function(data) {
+        console.log("JOIN: ", data)
+        socket.join(data.room);
+    });
+    socket.on('exit_chat', (data) => {
+        console.log("EXIT: ", data)
+        socket.leave(data.room)
+    });
+    socket.on('new_message', (data) => {
+        console.log(data)
+        socket.broadcast.to(data.room)
+        .emit('message_recived', 
+        data);
+    })
 });
 
 

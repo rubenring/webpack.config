@@ -4,10 +4,6 @@ export default (html, preloadedState) => {
         <html>
         <head>
             <title>Socket IO - React SSR</title>
-            <script src="/socket.io/socket.io.js"></script>
-            <script>
-                var socket = io();
-            </script>
         </head>
         <body>
             <div id="root">${html}</div>

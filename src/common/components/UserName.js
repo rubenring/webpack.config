@@ -18,7 +18,7 @@ class Username extends React.Component {
         return (
             <article>
                 <h2>Velg ditt navn</h2>
-                <input onKeyPress={this.handleEnter.bind(this)} placeholder="Ditt brukernavn" defaultValue={this.props.username} type="text" ref="username" />
+                <input onKeyPress={this.handleEnter.bind(this)} placeholder="Ditt brukernavn" defaultValue={this.props.user.username} type="text" ref="username" />
                 <button onClick={this.handleSetUsername.bind(this)}>Gå videre</button>
             </article>
         )
@@ -26,7 +26,7 @@ class Username extends React.Component {
 };
 
 const mapStateToProps = (state) => ({
-    username: state.chat.username 
+    user: state.chat.user 
 })
 
 const mapDispatchToProps = (dispatch) => {

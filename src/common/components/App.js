@@ -17,11 +17,11 @@ class App extends React.Component {
   render() {
     return (
       <div style={appStyles}>
-        { this.props.username ? <Chat /> : <Username /> }        
+        { this.props.user.username ? <Chat /> : <Username /> }        
         <Tictac />
       </div>
     );
   }
 }
 
-export default connect(state => ({username: state.chat.username}))(App);
+export default connect(state => ({user: state.chat.user}))(App);

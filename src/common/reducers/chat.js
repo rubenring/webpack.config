@@ -1,5 +1,6 @@
 import {
     SEND_MESSAGE,
+    RECIVE_MESSAGE
 } from '../actions/chatActions'
 import {
     SET_USERNAME
@@ -11,7 +12,7 @@ const chat = (state = initialState, action) => {
     switch (action.type) {
         case SET_USERNAME:
             return Object.assign({}, state, {
-                    username: action.payload
+                    user: action.payload
                 }
              )
         case SEND_MESSAGE:
@@ -19,18 +20,30 @@ const chat = (state = initialState, action) => {
                 {
                     message: Object.assign({}, state.message, {
                         id: 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                                var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-                                return v.toString(16);
-                            }),
+                            let r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+                            return v.toString(16);
+                        }),
                         text: action.payload,
-                        username: state.username,
+                        username: state.user.username,
                     }),
                 }
             );
-            newState.messagelist.push({
-                message: newState.message,
+            return Object.assign({}, state, {
+                messagelist: state.messagelist.concat({message: newState.message})
+            })
+        case RECIVE_MESSAGE: 
+            return Object.assign({}, state, {
+                messagelist: state.messagelist.concat({
+                    message: {
+                        id: 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                            let r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+                            return v.toString(16);
+                        }),
+                        text: action.payload.msg,
+                        username: action.payload.user
+                    }
+                })
             });
-            return newState;
         default:
             return state
     }

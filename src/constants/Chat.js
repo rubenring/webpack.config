@@ -3,6 +3,9 @@ export default {
         id: "",
         text: ""
     },
-    username: "",
+    user: {
+        userId: "",
+        username: ""
+    },
     messagelist: []
 }

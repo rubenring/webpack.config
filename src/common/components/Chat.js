@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import * as ChatActions from '../actions/chatActions';
 import { bindActionCreators } from 'redux';
 
+import io from 'socket.io-client'; 
+
+const socket = io('http://localhost:3000');
+
 const chatStyles = {
     display: "inline-block"
 }
@@ -21,9 +25,33 @@ const messageListStyle = {
 class Chat extends React.Component {
     constructor(props){
         super(props)
+        socket.on('message_recived', (payload) => {   
+                this.props.reciveMessage({
+                    msg: payload.message.msg,
+                    user: payload.message.user
+                });
+            }
+        );
+    }
+    componentDidMount(){
+        socket.emit('chat', {
+            room: "Chatroom"
+        });
+    }
+    componentWillUnmount() {  
+        socket.emit('exit_chat', {
+            room: "Chatroom"
+        })
     }
     handleSendMessage(){
-        this.props.sendMessage(this.refs.message.value)
+        this.props.sendMessage(this.refs.message.value);
+        socket.emit('new_message', {
+            room: "Chatroom",
+            message: {
+                msg: this.refs.message.value,
+                user: this.props.chat.user.username
+            }
+        })
         this.refs.message.value = "";
     }
     handleKeyPress($event) {
@@ -35,7 +63,7 @@ class Chat extends React.Component {
             <article style={chatStyles}>
                 <header>
                     <h2>Chat med motstanderen</h2>
-                    <p>Hei {this.props.chat.username}</p>
+                    <p>Hei {this.props.chat.user.username}</p>
                 </header>
                 <article style={messageListStyle}>
                     {
